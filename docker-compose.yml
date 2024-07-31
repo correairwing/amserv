@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: gestao-postgres
+    environment:
+      POSTGRES_USER: meu_usuario
+      POSTGRES_PASSWORD: minha_senha
+      POSTGRES_DB: meu_banco
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: gestao-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: meu_email@example.com
+      PGADMIN_DEFAULT_PASSWORD: minha_senha
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
